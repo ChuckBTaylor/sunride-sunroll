@@ -1,5 +1,6 @@
 window.onload = function(){
   addEventListeners()
+  drawNight()
   let lng, lat;
 }
 
@@ -14,9 +15,13 @@ function addEventListeners(){
   })
 
   $('#table-holder').mouseover(ev => {
-
     if (ev.target && ev.target.nodeName === "TD" && ev.target.classList[0] !== "ignore-mouse"){
       handleMouseover(ev.target)
+    }
+  })
+  $('#table-holder').mouseout(ev => {
+    if (ev.target && ev.target.nodeName === "TD" && ev.target.classList[0] !== "ignore-mouse"){
+      handleMouseout()
     }
   })
 }
@@ -120,9 +125,18 @@ function addTable(){
 }
 
 function handleMouseover(target){
+  ap = target.textContent.slice(-2,-1)
   let hour = parseInt(target.textContent.match(/^\d{1,2}/)[0])
-  hour = target.textContent.slice(-2, -1) === "P" ? hour + 12 : hour
-  console.log(hour);
+  if (ap === "P"){
+    if (hour !== 12){
+      hour += 12
+    }
+  } else {
+    if (hour === 12){
+      hour -= 12
+    }
+  }
+  fromMouseOver(hour)
 
 }
 
@@ -141,6 +155,10 @@ function santizeUserInput(number){
     number += "."
   }
   return number
+}
+
+function handleMouseout(){
+  drawNight()
 }
 
 function displayError(){

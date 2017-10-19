@@ -1,33 +1,26 @@
 const sunride = document.getElementById('sunride');
 const ctx = sunride.getContext("2d");
 let c = 0;
-document.getElementById('cycle').addEventListener('click', cycle);
+// document.getElementById('cycle').addEventListener('click', cycle);
 
-function cycle() {
+function fromMouseOver(hour) {
   ctx.clearRect(0, 0, sunride.width, sunride.height);
 
-  // if (hour <= 7 && hour > 4) {
-  //   drawDawn();
-  // } else if (hour <= 10 && hour > 7) {
-  //   drawMidMorning();
-  // } else if (hour <= 2 && hour > 10) {
-  //   drawNoon();
-  // } else if (hour <= 6 && hour > 2) {
-  //   drawMidAfternoon();
-  // } else if (hour <= 9 && hour > 6) {
-  //   drawDusk();
-  // } else {
-  //   drawNight();
-  // }
+  if (hour <= 7 && hour > 4) {drawDawn();} else
+  if (hour <= 10 && hour > 7) {drawMidMorning();} else
+  if (hour <= 14 && hour > 10) {drawNoon();} else
+  if (hour <= 18 && hour > 14) {drawMidAfternoon();} else
+  if (hour <= 21 && hour > 18) {drawDusk();}
+  else {drawNight();}
 
-  switch (c) {
-    case 0 : drawDawn(); c++; break;
-    case 1 : drawMidMorning(); c++; break;
-    case 2 : drawNoon(); c++; break;
-    case 3 : drawMidAfternoon(); c++; break;
-    case 4 : drawDusk(); c++; break;
-    case 5 : drawnNight(); c = 0; break;
-  }
+  // switch (c) {
+  //   case 0 : drawDawn(); c++; break;
+  //   case 1 : drawMidMorning(); c++; break;
+  //   case 2 : drawNoon(); c++; break;
+  //   case 3 : drawMidAfternoon(); c++; break;
+  //   case 4 : drawDusk(); c++; break;
+  //   case 5 : drawnNight(); c = 0; break;
+  // }
 };
 
 function drawDawn() {
@@ -121,5 +114,11 @@ function drawNight() {
   ctx.fillStyle = '#191938';
   ctx.fillRect(0, 0, sunride.width, sunride.height);
   ctx.fillStyle = '#d1d0cf'
-  for(let i=0; i<)
+  for(let i=0; i<50; i++) {
+    let x = Math.round(Math.random() * 800);
+    let y = Math.round(Math.random() * 300);
+    ctx.beginPath();
+    ctx.arc(x, y, 1, 0, 2*Math.PI);
+    ctx.fill();
+  }
 }
